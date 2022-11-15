@@ -40,8 +40,6 @@
 
 <script>
   export default {
-    name: 'HelloWorld',
-    data: () => ({
-    }),
+    name: 'HomePage',
   }
 </script>
