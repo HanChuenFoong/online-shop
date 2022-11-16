@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <v-app>
-      <v-app-bar class="primary lighten-3" max-height="70">
+      <v-app-bar class="grey darken-2" max-height="70">
+        <v-app-bar-title>ShoeShine</v-app-bar-title>
       </v-app-bar>
       <router-view />
     </v-app>
