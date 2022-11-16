@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { initializeAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC2_gQMPbHg9rhijvj7wF-IKQ1LMDnmcLY",
@@ -15,7 +16,6 @@ const firebaseConfig = {
 // init firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = initializeAuth(app)
 
-// init firestore service
-
-export { db }
+export { db, auth }

@@ -1,7 +1,19 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
+import { getShoes, addProfile } from "../admin.js";
 
-export const useShoeStore = defineStore('shoe', {
+export const useShoeStore = defineStore("shoe", {
   state: () => ({
-    name: 'Nike'
+    inventory: [],
+    profile: {},
   }),
-})
+  actions: {
+    async getInventory() {
+      let res = await getShoes();
+      this.inventory = res;
+    },
+    async createAccount(payload) {
+      let res = await addProfile(payload);
+      this.profile = res
+    }
+  },
+});
