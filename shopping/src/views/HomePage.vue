@@ -1,7 +1,16 @@
 <template>
-  <v-sheet class="grey lighten-3">
+  <v-sheet class="grey lighten-3" :height="sheetHeight">
     <v-container>
-      <v-card
+      <v-subheader></v-subheader>
+      <div class="text-h6">
+        The only site for all your shoe needs!
+      </div>
+      <div class="subtitle-1">
+        Shop adidaz for all styles of shoes including sneakers, high-performance running shoes, and comfy slides.
+      </div>
+      <v-subheader></v-subheader>
+
+      <!-- <v-card
       class="mx-auto"
       max-width="400"
     >
@@ -33,7 +42,7 @@
           Explore
         </v-btn>
       </v-card-actions>
-    </v-card>
+    </v-card> -->
     </v-container>
   </v-sheet>
 </template>
@@ -41,5 +50,10 @@
 <script>
   export default {
     name: 'HomePage',
+    computed: {
+      sheetHeight() {
+        return this.$vuetify.breakpoint.height
+      }
+    }
   }
 </script>
