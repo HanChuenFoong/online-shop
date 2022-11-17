@@ -10,7 +10,7 @@
       >
         <v-scroll-x-transition hide-on-leave>
           <div v-if="!creating">
-            <v-card-title class="justify-center">Log In Here</v-card-title>
+            <v-card-title class="justify-center">Log In</v-card-title>
             <v-subheader></v-subheader>
             <v-card-text class="mt-3">
               <v-text-field
@@ -29,8 +29,8 @@
                 prepend-icon="mdi-lock-outline"
                 :rules="[rules.counter]"
               ></v-text-field>
-              <div class="ml-1 mt-2">
-                <span class="text-subtitle-1">New here?</span>
+              <div class="ml-1 mt-2 text-center">
+                <span class="text-subtitle-1">First time here?</span>
                 <v-btn text color="teal" class="mb-1" @click="createAccount"
                   >Register</v-btn
                 >
