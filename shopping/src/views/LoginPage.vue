@@ -1,9 +1,15 @@
 <template>
   <div>
-    <v-dialog :value="dialog" max-width="400" persistent>
+    <v-dialog :value="dialog" max-width="400" persistent hide-overlay>
       <v-card
         class="pa-2"
         max-width="400"
+        style="background: rgba( 255, 255, 255, 0.75 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 17.5px );
+        -webkit-backdrop-filter: blur( 18.0px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );"
         elevation="5"
         :loading="signingIn"
         :disabled="signingIn"
@@ -31,16 +37,16 @@
               ></v-text-field>
               <div class="ml-1 mt-2 text-center">
                 <span class="text-subtitle-1">First time here?</span>
-                <v-btn text color="teal" class="mb-1" @click="createAccount"
+                <v-btn text color="teal lighten-1" class="mb-1" @click="createAccount"
                   >Register</v-btn
                 >
               </div>
             </v-card-text>
             <v-subheader></v-subheader>
             <v-card-actions>
-              <v-btn color="grey" text @click="cancelSignIn">Cancel</v-btn>
+              <v-btn color="black" text @click="cancelSignIn">Cancel</v-btn>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="signIn">Sign In</v-btn>
+              <v-btn color="primary darken-1" text @click="signIn">Sign In</v-btn>
             </v-card-actions>
           </div>
         </v-scroll-x-transition>
@@ -62,7 +68,6 @@
                 v-model="menu"
                 :close-on-content-click="false"
                 transition="scale-transition"
-                offset-y
                 min-width="auto"
               >
                 <template v-slot:activator="{ on, attrs }">
@@ -111,9 +116,7 @@
             <v-card-actions class="mt-3">
               <v-btn color="black" text @click="cancelCreate">Cancel</v-btn>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="addAccount"
-                >Create</v-btn
-              >
+              <v-btn color="primary darken-1" text @click="addAccount">Create</v-btn>
             </v-card-actions>
           </div>
         </v-scroll-x-transition>
@@ -181,7 +184,7 @@ export default {
       this.creating = false;
     },
     cancelSignIn() {
-      this.$emit('cancel')
+      this.$emit("cancel");
     },
     async addAccount() {
       this.signingIn = true;
@@ -196,6 +199,8 @@ export default {
         this.selected.birthdate = this.date;
         delete this.selected.password;
         await this.shoeStore.createAccount(this.selected);
+        this.shoeStore.isLoggedIn = Boolean(auth.currentUser)
+        this.cancelSignIn()
         this.signingIn = false;
       } catch (err) {
         console.log("Creating account failed");
@@ -211,6 +216,8 @@ export default {
           this.selected.password
         );
         if (r) console.log("Account created");
+        this.shoeStore.isLoggedIn = Boolean(auth.currentUser)
+        this.cancelSignIn()
         this.signingIn = false;
       } catch (err) {
         console.log("Failed to sign in");

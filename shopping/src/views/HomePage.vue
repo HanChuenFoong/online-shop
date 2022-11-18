@@ -34,7 +34,7 @@
               <v-card
                 max-width="444"
                 class="mx-auto"
-                outlined
+                elevation="5"
                 @click="viewProduct(item)"
               >
                 <v-img
@@ -46,20 +46,12 @@
                 <v-card-text>
                   <v-row>
                     <v-col cols="6">
-                      <div class="body-1">{{ item.data.name }}</div>
+                      <div class="body-1 font-weight-bold">{{ item.data.name }}</div>
                       <div>{{ item.data.gender }}</div>
-                      <div class="body-2 pt-1">$ {{ item.data.price }}</div>
                     </v-col>
-                    <v-col cols="6">
-                      <v-rating
-                        color="warning"
-                        full-icon="mdi-star"
-                        length="5"
-                        readonly
-                        dense
-                        size="25"
-                        :value="item.data.rating"
-                      ></v-rating>
+                    <v-spacer></v-spacer>
+                    <v-col cols="auto">
+                      <div class="subtitle-1 pt-1 font-weight-bold">$ {{ item.data.price }}</div>
                     </v-col>
                   </v-row>
                 </v-card-text>
@@ -74,7 +66,7 @@
           @cancel="closeViewProdcut"
         />
       </v-sheet>
-      <v-sheet class="teal lighten-4" height="100%">
+      <v-sheet class="backdrop" height="100%">
         <v-container class="text-center">
           <v-subheader></v-subheader>
           <div class="text-h5">Join Arcain Clan and receive 90% off your first order.</div>
@@ -172,3 +164,29 @@ export default {
   }
 };
 </script>
+
+<style>
+.backdrop {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+        -45deg, 
+        rgb(109, 180, 213) 0%, 
+        rgb(147, 156, 202) 25%, 
+        rgb(211, 171, 225) 51%, 
+        rgb(178, 223, 219) 75%, 
+        rgb(255, 202, 222) 100%
+  );  
+  animation: AnimateBG 20s ease infinite;
+}
+
+@keyframes AnimateBG { 
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+</style>
