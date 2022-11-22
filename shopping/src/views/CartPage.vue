@@ -75,12 +75,18 @@ export default {
     cancelCart() {
       this.$emit("cancel");
     },
-    paymentCart() {
+    async paymentCart() {
       if (!auth.currentUser || !this.shoeStore.cart.length) {
         console.log("Email needed or cart empty");
         return;
       }
-      console.log(this.shoeStore.profile)
+      const {url} = await fetch("http://localhost:3000/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(r => r.json())
+      window.location.href = url
     },
   },
   computed: {

@@ -68,7 +68,6 @@ export default {
   name: "App",
   setup() {
     const shoeStore = useShoeStore();
-
     return { shoeStore };
   },
   components: {
