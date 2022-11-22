@@ -7,21 +7,18 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
         <div>
-          <v-tooltip bottom nudge-bottom="5">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                class="mr-5"
-                color="white"
-                icon
-                v-bind="attrs"
-                v-on="on"
-                @click="showCart"
-              >
-                <v-icon>mdi-cart-variant</v-icon>
-              </v-btn>
-            </template>
-            <span>Cart</span>
-          </v-tooltip>
+          <v-badge
+          class="mr-5"
+            :content="shoeStore.cart.length"
+            :value="shoeStore.cart.length"
+            offset-x="25"
+            offset-y="45"
+            overlap
+          >
+            <v-btn class="ma-0 pa-0" color="white" icon @click="showCart">
+              <v-icon>mdi-cart-variant</v-icon>
+            </v-btn>
+          </v-badge>
           <v-btn
             v-if="!shoeStore.userLoggedIn"
             class="mr-5"
@@ -31,24 +28,18 @@
             <v-icon>mdi-login</v-icon>
             <span class="ml-2">Log In</span>
           </v-btn>
-            <v-menu offset-y v-if="shoeStore.userLoggedIn">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                class="mr-4"
-                  v-on="on"
-                  v-bind="attrs"
-                  elevation="0"
-                  icon
-                >
-                  <v-avatar color="white" size="36">HC</v-avatar>
-                </v-btn>
-              </template>
-              <v-list>
-                <v-list-item @click="loggedOut">
-                  <v-list-item-title>Log Out</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
+          <v-menu offset-y v-if="shoeStore.userLoggedIn">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mr-4" v-on="on" v-bind="attrs" elevation="0" icon>
+                <v-avatar color="white" size="36">HC</v-avatar>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="loggedOut">
+                <v-list-item-title>Log Out</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </div>
       </v-app-bar>
       <router-view />
@@ -95,7 +86,7 @@ export default {
     },
     async loggedOut() {
       await auth.signOut();
-      this.shoeStore.isLoggedIn = false
+      this.shoeStore.isLoggedIn = false;
     },
   },
 };
