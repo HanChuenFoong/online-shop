@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getShoes, addProfile } from "../admin.js";
+import { getShoes, addProfile, loadProfile } from "../admin.js";
 
 export const useShoeStore = defineStore("shoe", {
   state: () => ({
@@ -39,7 +39,11 @@ export const useShoeStore = defineStore("shoe", {
     async createAccount(payload) {
       let res = await addProfile(payload);
       this.profile = res
-    }
+    },
+    async getProfile(payload) {
+      let res = await loadProfile(payload);
+      this.profile = res
+    },
   },
   getters: {
     userLoggedIn() {

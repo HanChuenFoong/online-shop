@@ -162,6 +162,7 @@ export default {
         birthdate: "",
         email: "",
         password: "",
+        cart: [],
       },
       activePicker: null,
       date: null,
@@ -215,7 +216,7 @@ export default {
           this.selected.email,
           this.selected.password
         );
-        if (r) console.log("Account created");
+        if (r) await this.shoeStore.getProfile(r.user.uid)
         this.shoeStore.isLoggedIn = Boolean(auth.currentUser)
         this.cancelSignIn()
         this.signingIn = false;
