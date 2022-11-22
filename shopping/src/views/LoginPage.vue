@@ -29,6 +29,7 @@
               ></v-text-field>
               <v-text-field
                 v-model="selected.password"
+                type="password"
                 outlined
                 rounded
                 label="Password"
@@ -106,6 +107,7 @@
               ></v-text-field>
               <v-text-field
                 v-model="selected.password"
+                type="password"
                 outlined
                 rounded
                 label="Password"
