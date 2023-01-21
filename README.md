@@ -1,4 +1,4 @@
-# Arcain Online Shop
+# E-Commerce Sporting Apparel Shop
 
 ## Online Shop Showcase Video
 Link: https://youtu.be/dav6Prb8ZUs
