@@ -23,7 +23,7 @@
             v-if="!shoeStore.userLoggedIn"
             class="mr-5"
             elevation="0"
-            @click="logingIn"
+            @click="loggingIn"
           >
             <v-icon>mdi-login</v-icon>
             <span class="ml-2">Log In</span>
@@ -72,7 +72,7 @@ export default {
     };
   },
   methods: {
-    logingIn() {
+    loggingIn() {
       this.loginDialog = true;
     },
     cancelDialog() {

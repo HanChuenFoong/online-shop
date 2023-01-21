@@ -1,3 +1,5 @@
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase/config.js";
 import { defineStore } from "pinia";
 import { getShoes, addProfile, loadProfile } from "../admin.js";
 
@@ -30,6 +32,8 @@ export const useShoeStore = defineStore("shoe", {
     ],
     quantity: [1,2,3,4,5,6,7,8,9,10],
     isLoggedIn: false,
+    authIsReady: false,
+    userName: '',
   }),
   actions: {
     async getInventory() {
@@ -44,10 +48,20 @@ export const useShoeStore = defineStore("shoe", {
       let res = await loadProfile(payload);
       this.profile = res
     },
+    async getAuthIsReady() {
+      const unsub = onAuthStateChanged(auth, (user) => {
+        this.userName = user
+        this.authIsReady = true
+        unsub()
+      })
+    }
   },
   getters: {
     userLoggedIn() {
       return this.isLoggedIn
+    },
+    IsAuthReady() {
+      return this.authIsReady
     }
   }
 });

@@ -115,6 +115,7 @@
 <script>
 import { useShoeStore } from "../stores/ItemStore";
 import ProductPage from "@/views/ProductPage.vue";
+import { sendEmail } from '../mailer'
 
 export default {
   name: "HomePage",
@@ -140,6 +141,7 @@ export default {
     async loadInventory() {
       this.loading = true;
       await this.shoeStore.getInventory();
+      await this.shoeStore.getAuthIsReady();
     },
     viewProduct(item) {
       this.selectedItem = item;
@@ -150,9 +152,10 @@ export default {
     },
     submitEmail() {
       this.targetEmail = this.email
+      sendEmail(this.targetEmail)
       this.email = ''
       this.snackbar = true
-    }
+    },
   },
   mounted() {
     this.loadInventory();

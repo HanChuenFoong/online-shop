@@ -36,7 +36,6 @@ app.post("/create-checkout-session", async (req, res) => {
       quantity: item.quantity,
     };
   });
-  console.log("Working")
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: lineItems,
