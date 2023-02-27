@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-center" v-if="loading">
+    <div class="text-center" v-if="loading && !shoeStore.isAuthReady">
       <v-progress-circular
         size="64"
         color="primary"
@@ -94,19 +94,19 @@
       </v-sheet>
     </div>
     <v-snackbar
-    v-model="snackbar"
-    class="mb-15"
-  >
-    Discount code generated for '{{targetEmail}}'
-    <template v-slot:action="{ attrs }">
-      <v-btn
-        color="warning"
-        text
-        v-bind="attrs"
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
+      v-model="snackbar"
+      class="mb-15"
+    >
+      Discount code generated for '{{targetEmail}}'
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="warning"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
     </template>
   </v-snackbar>
   </div>
@@ -158,6 +158,7 @@ export default {
     },
   },
   mounted() {
+    this.shoeStore.getAuthIsReady()
     this.loadInventory();
   },
   watch: {

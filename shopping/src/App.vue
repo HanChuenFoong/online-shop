@@ -44,7 +44,7 @@
       </v-app-bar>
       <router-view />
       <LoginPage :dialog="loginDialog" @cancel="cancelDialog" />
-      <CartPage :dialog="cartDialog" @cancel="cancelCart" />
+      <CartPage :dialog="cartDialog" @cancel="cancelCart" @directLogIn="logInCheckout" />
     </v-app>
   </div>
 </template>
@@ -88,6 +88,10 @@ export default {
       await auth.signOut();
       this.shoeStore.isLoggedIn = false;
     },
+    logInCheckout() {
+      this.cancelCart()
+      this.loggingIn()
+    }
   },
 };
 </script>

@@ -33,7 +33,6 @@ export const useShoeStore = defineStore("shoe", {
     quantity: [1,2,3,4,5,6,7,8,9,10],
     isLoggedIn: false,
     authIsReady: false,
-    userName: '',
   }),
   actions: {
     async getInventory() {
@@ -50,17 +49,22 @@ export const useShoeStore = defineStore("shoe", {
     },
     async getAuthIsReady() {
       const unsub = onAuthStateChanged(auth, (user) => {
-        this.userName = user
+        if (user) {
+          this.isLoggedIn = true
+        } else {
+          this.isLoggedIn = false
+        }
         this.authIsReady = true
         unsub()
       })
+      console.log('Logged in as: ', auth.currentUser)
     }
   },
   getters: {
     userLoggedIn() {
-      return this.isLoggedIn
+      return auth.currentUser
     },
-    IsAuthReady() {
+    isAuthReady() {
       return this.authIsReady
     }
   }

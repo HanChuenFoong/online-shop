@@ -56,6 +56,48 @@
         <v-btn color="primary" text @click="paymentCart">Continue</v-btn>
       </v-card-actions>
     </v-card>
+    <v-snackbar
+      v-model="cartSnackbar"
+      class="mb-15"
+      width="200"
+    >
+      Please add items into shopping cart.
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="warning"
+          text
+          v-bind="attrs"
+          @click="cartSnackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <v-snackbar
+    v-model="loggedSnackbar"
+    class="mb-15"
+    width="200"
+  >
+    Please log in to checkout.
+    <template v-slot:action="{ attrs }">
+      <v-btn
+        color="red"
+        text
+        v-bind="attrs"
+        @click="directLogIn"
+      >
+        Log In
+      </v-btn>
+      <v-btn
+        color="warning"
+        text
+        v-bind="attrs"
+        @click="loggedSnackbar = false"
+      >
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
   </v-dialog>
 </template>
 
@@ -71,16 +113,26 @@ export default {
   props: {
     dialog: Boolean,
   },
+  data() {
+    return {
+      cartSnackbar: false,
+      loggedSnackbar: false,
+    }
+  },
   methods: {
     cancelCart() {
       this.$emit("cancel");
     },
     async paymentCart() {
-      if (!auth.currentUser || !this.shoeStore.cart.length) {
-        console.log("Email needed or cart empty");
+      if (!this.shoeStore.cart.length) {
+        this.cartSnackbar = true
         return;
       }
-      const {url} = await fetch("http://localhost:3000/create-checkout-session", {
+      if (!auth.currentUser) {
+        this.loggedSnackbar = true
+        return;
+      }
+      const { url } = await fetch("http://localhost:3000/create-checkout-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,13 +140,17 @@ export default {
       }).then(r => r.json())
       window.location.href = url
     },
+    directLogIn() {
+      this.$emit('directLogIn')
+      this.loggedSnackbar = false
+    }
   },
   computed: {
     subtotal() {
       let total = 0;
       for (let item of this.shoeStore.cart)
         total += item.product.data.price * item.quantity;
-      return total;
+      return total.toFixed(2);
     },
   },
 };
