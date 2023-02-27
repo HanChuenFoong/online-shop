@@ -10,21 +10,24 @@
       <v-card-text class="mt-3 pt-2">
         <v-row>
           <v-col cols="5">
-            <div class="body-1 font-weight-bold">{{ productName }}</div>
+            <div class="text-h5 font-weight-bold">{{ productName }}</div>
           </v-col>
           <v-spacer></v-spacer>
-          <v-col cols="auto">
-            <v-rating
-              color="warning"
-              full-icon="mdi-star"
-              length="5"
-              readonly
-              dense
-              size="25"
-              :value="rating"
-            ></v-rating>
+          <v-col cols="auto" class="mr-1">
+            <div class="text-h6 font-weight-bold">${{ listedPrice }}</div>
           </v-col>
         </v-row>
+        <div class="mt-1 d-flex justify-end">
+          <v-rating
+          color="warning"
+          full-icon="mdi-star"
+          length="5"
+          readonly
+          dense
+          size="25"
+          :value="rating"
+        ></v-rating>
+        </div>
         <div class="mt-3">
           {{ productName }} is made with eco-friendly materials. Ideal for every
           situation, this product excels specifically in a sport setting. Clothe
@@ -89,11 +92,14 @@ export default {
   },
   computed: {
     productName() {
-      return this.item?.data?.name || "";
+      return this.item?.data?.name || ""
     },
     rating() {
       return this.item?.data?.rating || 0
     },
+    listedPrice() {
+      return this.item?.data?.price || 0
+    }
   },
 };
 </script>

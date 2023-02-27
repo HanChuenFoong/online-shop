@@ -9,6 +9,7 @@
     "devStart": "nodemon server.js"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.10.0",
     "@vue/devtools-api": "^6.4.5",
     "axios": "^1.1.3",
     "core-js": "^3.8.3",
