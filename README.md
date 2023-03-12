@@ -1,20 +1,24 @@
-# E-Commerce Sporting Apparel Shop
-
-## Online Shop Showcase Video
-Link: https://youtu.be/dav6Prb8ZUs
-
+# shopping
 
 ## Project setup
-To run this repo, you will need to run 2 commands in the terminal:
+```
+npm install
+```
 
-First step - type `cd shopping`, then type:
+### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-Second step - create another bash session and type `cd server`, then type:
+### Compiles and minifies for production
 ```
-npm run devStart
+npm run build
 ```
 
+### Lints and fixes files
+```
+npm run lint
+```
 
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
